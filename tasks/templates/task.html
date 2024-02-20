@@ -1,7 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>task</h1>
+<div class="container">
+    <h1 class="mt-5">Tareas pendientes</h1>
+    <div class="row mt-4">
+        {% for task in tasks %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title {% if task.important %}text-danger{% endif %}">{{ task.title }}</h5>
+                    <p class="card-text">{{ task.description }}</p>
+                    <p class="card-text">Usuario: {{ task.user.name }}</p>
+                    <p class="card-text">Fecha completada: {{ task.datecompleted|date:'M j Y:i' }}</p>
+                    <a href="{% url 'task_detail' task.id %}" class="btn btn-primary">Ver detalle</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
-
-
